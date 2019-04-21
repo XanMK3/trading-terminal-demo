@@ -1,0 +1,32 @@
+.explorer {
+    display: flex;
+    color: white;
+    background-color: #404040;
+    border-right: 1px solid #585858;
+}
+
+.explorer__tab-header {
+    writing-mode: tb-rl;
+}
+
+.explorer__tab-button {
+    padding: 1em 0;
+    background-color: black;
+    cursor: pointer;
+}
+
+.explorer__panel-close {
+    float: right;
+    cursor: pointer;
+}
+
+.explorer__list {
+    margin: 1em 0;
+    padding: 0;
+    list-style: none;
+}
+
+.explorer__list-item {
+    padding: 0.5em;
+    margin: 0;
+}
