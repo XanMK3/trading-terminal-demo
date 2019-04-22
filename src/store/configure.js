@@ -2,8 +2,8 @@ import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './reducer';
 
-const configureStore = (initialState) => {
-    const getMiddleware = () => applyMiddleware(thunk);
+const configureStore = (initialState, { http }) => {
+    const getMiddleware = () => applyMiddleware(thunk.withExtraArgument({ http }));
 
     const store = createStore(reducer, initialState, getMiddleware());
 

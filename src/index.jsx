@@ -5,8 +5,9 @@ import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 import App from './components/app';
 import configureStore from 'store/configure';
+import http from 'services/http';
 
-const store = configureStore();
+const store = configureStore({}, {http});
 
 ReactDOM.render(
     <AppContainer>
