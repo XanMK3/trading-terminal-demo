@@ -1,0 +1,29 @@
+.news-list {
+    padding: 1em;
+    margin: 0;
+    list-style: none;
+    &>li {
+        margin-bottom: 1em; 
+    }
+}
+
+.news {
+    border-bottom: 1px solid white;
+}
+
+.news__title {
+    font-size: 1rem;
+}
+
+.news__image {
+
+}
+
+.news__summary {
+    font-size: 0.8rem;
+}
+
+.news__link {
+    color: white;
+    font-size: 0.8rem;
+}
