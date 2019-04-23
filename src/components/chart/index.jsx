@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { withSize } from 'react-sizeme'
+import { withSize } from 'react-sizeme';
 import Plotly from 'plotly.js/dist/plotly-finance.min';
 import createPlotlyComponent from 'react-plotly.js/factory';
+
 const Plot = createPlotlyComponent(Plotly);
 
 const layout = {
@@ -32,7 +33,7 @@ class Chart extends Component {
             high: [],
             low: [],
             close: [],
-        }
+        },
     }
 
     componentDidMount() {
@@ -44,9 +45,9 @@ class Chart extends Component {
                     high: data.map(({ high }) => high),
                     low: data.map(({ low }) => low),
                     close: data.map(({ close }) => close),
-                })
+                });
                 this.setState({ data: ohlc });
-            })
+            });
     }
 
     render() {
@@ -66,12 +67,12 @@ class Chart extends Component {
                         ...layout,
                         width: size.width,
                         height: size.height,
-                        title: 'AAPL'
+                        title: 'AAPL',
                     }}
                     config={CONFIG}
                 />
             </div>
-        )
+        );
     }
 }
 

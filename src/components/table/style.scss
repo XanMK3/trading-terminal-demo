@@ -1,0 +1,27 @@
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.75rem;
+    &__th {
+        padding: 8px 12px;
+        background-color: #505050;
+    }
+    &__td {
+        padding: 8px 12px;
+        border-bottom: 1px solid #505050;
+    }
+    &__th.align-left,
+    &__td.align-left {
+        text-align: left;
+    }
+    
+    &__th.align-right,
+    &__td.align-right {
+        text-align: right;
+    }
+    &__tr:last-child {
+        .table__td {
+            border-bottom: none;
+        }
+    }
+}

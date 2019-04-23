@@ -20,11 +20,11 @@ class NewsList extends Component {
                     </li>
                 ))}
             </ul>
-        )
+        );
     }
-};
+}
 
-const mapState = (state) => ({
+const mapState = state => ({
     data: state.news.data,
 });
 

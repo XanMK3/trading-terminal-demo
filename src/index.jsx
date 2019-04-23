@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { AppContainer } from 'react-hot-loader';
-import App from './components/app';
+import App from 'components/app';
 import configureStore from 'store/configure';
 import http from 'services/http';
 
-const store = configureStore({}, {http});
+import 'style/main.scss';
+
+const store = configureStore({}, { http });
 
 ReactDOM.render(
     <AppContainer>

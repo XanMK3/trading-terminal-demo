@@ -5,45 +5,53 @@ import Quotes from 'components/quotes';
 import Chart from 'components/chart';
 import News from 'components/news';
 
-import 'flexlayout-react/style/dark.css';
-
 const layout = {
-    "type": "row",
-    "id": "1",
-    "children": [
+    type: 'row',
+    id: '1',
+    children: [
         {
-            "type": "row",
-            "id": "2",
-            "weight": 75,
-            "children": [
+            type: 'row',
+            id: '2',
+            weight: 75,
+            children: [
                 {
-                    "type": "tabset",
-                    "id": "3",
-                    "weight": 50,
-                    "children": [{ "type": "tab", "id": "4", "name": "Quotes", "component": "quotes" }]
+                    type: 'tabset',
+                    id: '3',
+                    weight: 50,
+                    children: [{
+                        type: 'tab',
+                        id: '4',
+                        name: 'Quotes',
+                        component: 'quotes',
+                    }],
                 },
                 {
-                    "type": "tabset",
-                    "id": "5",
-                    "weight": 50,
-                    "children": [{ "type": "tab", "id": "6", "name": "Chart", "component": "chart" }]
-                }
-            ]
+                    type: 'tabset',
+                    id: '5',
+                    weight: 50,
+                    children: [{
+                        type: 'tab',
+                        id: '6',
+                        name: 'Chart',
+                        component: 'chart',
+                    }],
+                },
+            ],
         },
         {
-            "type": "tabset",
-            "id": "7",
-            "weight": 25,
-            "children": [
+            type: 'tabset',
+            id: '7',
+            weight: 25,
+            children: [
                 {
-                    "type": "tab",
-                    "id": "8",
-                    "name": "News",
-                    "component": "news",
-                }
-            ]
-        }
-    ]
+                    type: 'tab',
+                    id: '8',
+                    name: 'News',
+                    component: 'news',
+                },
+            ],
+        },
+    ],
 };
 
 const json = {
@@ -85,33 +93,34 @@ class App extends Component {
 
     factory = (node) => {
         const component = node.getComponent();
-        if (component === "news") {
+        if (component === 'news') {
             return (<News />);
         }
-        if (component === "quotes") {
+        if (component === 'quotes') {
             return (<Quotes />);
         }
-        if (component === "chart") {
+        if (component === 'chart') {
             return (<Chart />);
         }
     }
 
-    onModelChange = (model) => { }
+    onModelChange = () => { }
 
     render() {
-        const { navOpen } = this.state;
+        const { model, navOpen } = this.state;
 
         return (
             <div style={style}>
                 <Explorer open={navOpen} toggle={this.toggleNav} />
                 <div style={style1}>
                     <FlexLayout.Layout
-                        model={this.state.model}
+                        model={model}
                         onModelChange={this.onModelChange}
-                        factory={this.factory} />
+                        factory={this.factory}
+                    />
                 </div>
             </div>
-        )
+        );
     }
 }
 

@@ -6,9 +6,9 @@ const News = memo(({ url, headline, summary }) => (
         <p className='news__summary'>
             {summary}
             {' '}
-            <a className='news__link' href={url} target='_blank'>source</a>
+            <a className='news__link' href={url} rel='noopener noreferrer' target='_blank'>source</a>
         </p>
     </div>
-))
+));
 
 export default News;

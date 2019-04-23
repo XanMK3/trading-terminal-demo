@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+@import '~flexlayout-react/style/dark.css';
+
+.flexlayout__tab_button {
+    padding: 0px 8px;
+    margin: 0;
+}
