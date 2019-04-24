@@ -29,7 +29,8 @@ if (module.hot) {
                 <Provider store={store}>
                     <NextApp />
                 </Provider>
-            </AppContainer>, document.querySelector('.root'),
+            </AppContainer>,
+            document.querySelector('.root'),
         );
     });
 }

@@ -4,79 +4,19 @@ import Explorer from 'components/explorer';
 import Quotes from 'components/quotes';
 import Chart from 'components/chart';
 import News from 'components/news';
-
-const layout = {
-    type: 'row',
-    id: '1',
-    children: [
-        {
-            type: 'row',
-            id: '2',
-            weight: 75,
-            children: [
-                {
-                    type: 'tabset',
-                    id: '3',
-                    weight: 50,
-                    children: [{
-                        type: 'tab',
-                        id: '4',
-                        name: 'Quotes',
-                        component: 'quotes',
-                    }],
-                },
-                {
-                    type: 'tabset',
-                    id: '5',
-                    weight: 50,
-                    children: [{
-                        type: 'tab',
-                        id: '6',
-                        name: 'Chart',
-                        component: 'chart',
-                    }],
-                },
-            ],
-        },
-        {
-            type: 'tabset',
-            id: '7',
-            weight: 25,
-            children: [
-                {
-                    type: 'tab',
-                    id: '8',
-                    name: 'News',
-                    component: 'news',
-                },
-            ],
-        },
-    ],
-};
+import DEFAULT_LAYOUT from 'constants/defaultLayout';
+import './style.scss';
 
 const json = {
-    global: { tabEnableClose: false },
-    layout,
-};
-
-const style = {
-    display: 'flex',
-    alignItems: 'stretch',
-    left: 0,
-    top: 0,
-    right: 0,
-    bottom: 0,
-    position: 'absolute',
-    overflow: 'hidden',
-};
-
-const style1 = {
-    position: 'relative',
-    height: '100vh',
-    flexGrow: 1,
+    global: {
+        splitterSize: 4,
+    },
+    layout: {},
 };
 
 class App extends Component {
+    layoutRef = React.createRef()
+
     state = {
         navOpen: true,
         model: FlexLayout.Model.fromJson(json),
@@ -102,20 +42,39 @@ class App extends Component {
         if (component === 'chart') {
             return (<Chart />);
         }
+        return null;
     }
 
-    onModelChange = () => { }
+    loadLayout = () => {
+        const model = FlexLayout.Model.fromJson({...json, ...{ layout: DEFAULT_LAYOUT } });
+        this.setState({ model });
+    }
 
     render() {
         const { model, navOpen } = this.state;
 
         return (
-            <div style={style}>
-                <Explorer open={navOpen} toggle={this.toggleNav} />
-                <div style={style1}>
+            <div className='app'>
+                <Explorer
+                    open={navOpen}
+                    toggle={this.toggleNav}
+                    loadLayout={this.loadLayout}
+                    onDragStart={
+                        (id) => {
+                            /* eslint-disable no-underscore-dangle */
+                            const nodeId = Object.values(model._idMap)
+                                .findIndex(node => node._attributes.component === id);
+                            /* eslint-enable no-underscore-dangle */
+                            if (nodeId === -1) {
+                                this.layoutRef.current.addTabWithDragAndDrop(id, { type: 'tab', component: id, name: id });
+                            }
+                        }
+                    }
+                />
+                <div className='layout-manager'>
                     <FlexLayout.Layout
+                        ref={this.layoutRef}
                         model={model}
-                        onModelChange={this.onModelChange}
                         factory={this.factory}
                     />
                 </div>
