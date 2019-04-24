@@ -1,20 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import * as actions from 'store/actions';
 import Table from 'components/table';
-
-const symbols = [
-    'aapl',
-    'goog',
-    'fb',
-    'amzn',
-    'nflx',
-    'tsla',
-    'ibm',
-    'csco',
-    'intc',
-    'orcl',
-    'hpq',
-];
+import SYMBOLS from 'constants/symbols';
 
 const COLUMNS = [
     { key: 'symbol', title: 'Symbol', className: 'align-left' },
@@ -26,22 +14,16 @@ const COLUMNS = [
     },
     { key: 'price', title: 'Price', className: 'align-right' },
     { key: 'size', title: 'Size', className: 'align-right' },
-]
+];
 
 class Quotes extends Component {
-    state = {
-        data: [],
-    }
-
     componentDidMount() {
-        axios.get(`https://api.iextrading.com/1.0/tops/last?symbols=${symbols.join()}`)
-            .then(({ data }) => {
-                this.setState({ data });
-            });
+        const { getQuotes } = this.props;
+        getQuotes(SYMBOLS);
     }
 
     render() {
-        const { data } = this.state;
+        const { data } = this.props;
 
         return (
             <div className='quotes'>
@@ -55,4 +37,8 @@ class Quotes extends Component {
     }
 }
 
-export default Quotes;
+const mapState = state => ({
+    data: state.quotes.data,
+});
+
+export default connect(mapState, actions)(Quotes);
