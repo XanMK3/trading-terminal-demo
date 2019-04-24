@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import * as actions from 'store/actions';
 import { withSize } from 'react-sizeme';
 import Plotly from 'plotly.js/dist/plotly-finance.min';
 import createPlotlyComponent from 'react-plotly.js/factory';
@@ -26,33 +27,13 @@ const CONFIG = {
 };
 
 class Chart extends Component {
-    state = {
-        data: {
-            x: [],
-            open: [],
-            high: [],
-            low: [],
-            close: [],
-        },
-    }
-
     componentDidMount() {
-        axios.get('https://api.iextrading.com/1.0/stock/aapl/time-series')
-            .then(({ data }) => {
-                const ohlc = ({
-                    x: data.map(({ date }) => date),
-                    open: data.map(({ open }) => open),
-                    high: data.map(({ high }) => high),
-                    low: data.map(({ low }) => low),
-                    close: data.map(({ close }) => close),
-                });
-                this.setState({ data: ohlc });
-            });
+        const { getTimeseries } = this.props;
+        getTimeseries('aapl');
     }
 
     render() {
-        const { data } = this.state;
-        const { size } = this.props;
+        const { data, size } = this.props;
 
         return (
             <div style={{ overflow: 'hidden', height: '100%' }}>
@@ -60,7 +41,13 @@ class Chart extends Component {
                     data={[
                         {
                             type: 'ohlc',
-                            ...data,
+                            ...{
+                                x: data.map(({ date }) => date),
+                                open: data.map(({ open }) => open),
+                                high: data.map(({ high }) => high),
+                                low: data.map(({ low }) => low),
+                                close: data.map(({ close }) => close),
+                            },
                         },
                     ]}
                     layout={{
@@ -76,4 +63,10 @@ class Chart extends Component {
     }
 }
 
-export default withSize({ monitorHeight: true })(Chart);
+const ResponsiveChart = withSize({ monitorHeight: true })(Chart);
+
+const mapState = state => ({
+    data: state.chart.data,
+});
+
+export default connect(mapState, actions)(ResponsiveChart);
