@@ -1,15 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { createStore } from 'redux-dynamic-modules';
+import thunk from 'redux-thunk';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { AppContainer } from 'react-hot-loader';
 import App from 'components/app';
-import configureStore from 'store/configure';
 import http from 'services/http';
-
 import 'style/main.scss';
 
-const store = configureStore({}, { http });
+const store = createStore(
+    /* initial state */
+    {},
+
+    /* enhancers */
+    [],
+
+    /* Extensions to load */
+    [{ middleware: [thunk.withExtraArgument({ http })] }],
+
+    /* modules */
+    // getModule(),
+);
+
+window.store = store;
 
 ReactDOM.render(
     <AppContainer>

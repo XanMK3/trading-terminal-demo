@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
+import Loadable from 'react-loadable';
 import FlexLayout from 'flexlayout-react';
 import Explorer from 'components/explorer';
-import Quotes from 'components/quotes';
-import Chart from 'components/chart';
-import News from 'components/news';
 import DEFAULT_LAYOUT from 'constants/defaultLayout';
 import './style.scss';
+
+const modulesContext = require.context(
+    'modules',
+    true,
+    /\.\/[^/]+\/index\.jsx/,
+    'lazy',
+);
+
+const modules = modulesContext.keys().reduce((modulesMap, key) => {
+    const moduleId = key.substr(2).split('/').shift();
+    modulesMap[moduleId] = Loadable({
+        loader: () => modulesContext(key),
+        loading: () => <div>Loading module...</div>,
+    });
+    return modulesMap;
+}, {});
 
 const json = {
     global: {
@@ -32,21 +46,18 @@ class App extends Component {
     }
 
     factory = (node) => {
-        const component = node.getComponent();
-        if (component === 'news') {
-            return (<News />);
+        const moduleId = node.getComponent();
+
+        if (modules[moduleId]) {
+            const Module = modules[moduleId];
+            return <Module />;
         }
-        if (component === 'quotes') {
-            return (<Quotes />);
-        }
-        if (component === 'chart') {
-            return (<Chart />);
-        }
+
         return null;
     }
 
     loadLayout = () => {
-        const model = FlexLayout.Model.fromJson({...json, ...{ layout: DEFAULT_LAYOUT } });
+        const model = FlexLayout.Model.fromJson({ ...json, ...{ layout: DEFAULT_LAYOUT } });
         this.setState({ model });
     }
 
@@ -57,6 +68,7 @@ class App extends Component {
             <div className='app'>
                 <Explorer
                     open={navOpen}
+                    moduleIds={Object.keys(modules)}
                     toggle={this.toggleNav}
                     loadLayout={this.loadLayout}
                     onDragStart={
