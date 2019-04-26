@@ -1,5 +1,3 @@
-'use strict';
-
 const baseConfig = require('./webpack.config.js');
 
 const devConfig = Object.assign({}, baseConfig, {
@@ -14,7 +12,7 @@ const devConfig = Object.assign({}, baseConfig, {
         hot: true,
         overlay: {
             warnings: true,
-            errors: true
+            errors: true,
         },
     },
     module: {
@@ -22,11 +20,11 @@ const devConfig = Object.assign({}, baseConfig, {
             {
                 test: /\.js$|\.jsx$/,
                 exclude: /(node_modules)/,
-                use: "babel-loader",
+                use: 'babel-loader',
             },
             {
                 test: /\.css$|\.scss$/,
-                use: ['style-loader', 'css-loader?sourceMap', 'sass-loader?sourceMap']
+                use: ['style-loader', 'css-loader?sourceMap', 'sass-loader?sourceMap'],
             },
             {
                 test: /\.(jpg|png|svg|woff|woff2|eot|ttf)$/,
@@ -36,11 +34,11 @@ const devConfig = Object.assign({}, baseConfig, {
                         name: '[name].[ext]',
                         outputPath: 'assets/',
                         publicPath: '/assets/',
-                    }
-                }
+                    },
+                },
             },
         ],
-        noParse: [/\.min\.js/]
+        noParse: [/\.min\.js/],
     },
 });
 

@@ -1,12 +1,10 @@
-'use strict';
-
-const webpack = require('webpack'),
-      path = require('path');
+const webpack = require('webpack');
+const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const srcPath = path.join(__dirname, '../src/'),
-      distPath = path.join(__dirname, '../dist/');
+const srcPath = path.join(__dirname, '../src/');
+const distPath = path.join(__dirname, '../dist/');
 
 module.exports = {
     context: srcPath,
@@ -24,20 +22,20 @@ module.exports = {
         publicPath: '/',
     },
     resolve: {
-        modules: ["node_modules", srcPath],
-        extensions: [".js", ".json", ".jsx", ".css", ".scss"],
+        modules: ['node_modules', srcPath],
+        extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
     },
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.NamedModulesPlugin(),
         new webpack.ContextReplacementPlugin(
             /moment[/\\]locale$/,
-            /en/
+            /en/,
         ),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'index.html',
-            inject: true
+            inject: true,
         }),
-    ]
+    ],
 };
