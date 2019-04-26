@@ -1,15 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Panel from 'components/panel';
 import News from './item';
 
 const NewsList = ({ data }) => (
-    <ul className='news-list'>
-        {data.map(newsData => (
-            <li key={newsData.url}>
-                <News {...newsData} />
-            </li>
-        ))}
-    </ul>
+    <Panel>
+        <ul className='news-list'>
+            {data.map(newsData => (
+                <li key={newsData.url}>
+                    <News {...newsData} />
+                </li>
+            ))}
+        </ul>
+    </Panel>
 );
 
 const mapState = state => ({

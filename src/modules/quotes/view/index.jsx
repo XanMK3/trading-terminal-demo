@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Panel from 'components/panel';
 import Table from 'components/table';
 
 const COLUMNS = [
@@ -15,13 +16,15 @@ const COLUMNS = [
 ];
 
 const Quotes = ({ data }) => (
-    <div className='quotes'>
-        <Table
-            columns={COLUMNS}
-            data={data}
-            rowKey='symbol'
-        />
-    </div>
+    <Panel>
+        <div className='quotes'>
+            <Table
+                columns={COLUMNS}
+                data={data}
+                rowKey='symbol'
+            />
+        </div>
+    </Panel>
 );
 
 const mapState = state => ({
