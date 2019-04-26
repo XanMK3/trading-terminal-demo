@@ -1,8 +1,13 @@
 import React, { memo } from 'react';
 
-const News = memo(({ url, headline, summary }) => (
+const News = memo(({
+    url, datetime, headline, summary,
+}) => (
     <div className='news'>
-        <div className='news__title'>{headline}</div>
+        <div className='news__datetime'>{(new Date(datetime)).toLocaleString()}</div>
+        <div className='news__title'>
+            {headline}
+        </div>
         <p className='news__summary'>
             {summary}
             {' '}

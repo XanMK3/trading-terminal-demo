@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { DynamicModuleLoader } from 'redux-dynamic-modules';
-import ConnectedComponent from './components';
+import ConnectedComponent from './view';
 import { getQuotesModule } from './store';
 
-export default function Dynamic() {
+export default function Dynamic(props) {
     return (
         <DynamicModuleLoader modules={[getQuotesModule()]}>
-            <ConnectedComponent />
+            <ConnectedComponent {...props} />
         </DynamicModuleLoader>
     );
 }
