@@ -12,26 +12,24 @@ import 'style/main.scss';
 
 const store = createStore({}, [], [{ middleware: [thunk.withExtraArgument({ http })] }]);
 
-ReactDOM.render(
-    <AppContainer>
-        <Provider store={store}>
-            <App modules={modules} />
-        </Provider>
-    </AppContainer>,
-    document.querySelector('.root'),
-);
+const render = (AppComponent) => {
+    ReactDOM.render(
+        <AppContainer>
+            <Provider store={store}>
+                <AppComponent modules={modules} />
+            </Provider>
+        </AppContainer>,
+        document.querySelector('.root'),
+    );
+};
 
 if (module.hot) {
     module.hot.accept('app', () => {
         // eslint-disable-next-line global-require
-        const NextApp = require('app').default;
-        ReactDOM.render(
-            <AppContainer>
-                <Provider store={store}>
-                    <NextApp modules={modules} />
-                </Provider>
-            </AppContainer>,
-            document.querySelector('.root'),
-        );
+        render(require('app').default);
     });
 }
+
+window.onload = () => {
+    render(App);
+};

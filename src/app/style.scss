@@ -1,22 +1,19 @@
-.app {
-    display: flex;
-    align-items: stretch;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    overflow: hidden;
+@import '~flexlayout-react/style/dark.css';
+
+.flexlayout__tab_button {
+    padding: 0px 8px;
+    margin: 0;
 }
 
-.layout-manager {
-    position: relative;
+.app {
+    display: flex;
+    width: 100%;
     height: 100vh;
-    flex-grow: 1;
 }
 
 .explorer {
     display: flex;
+    flex: 0 0 auto;
     color: white;
     background-color: #404040;
     border-right: 1px solid #585858;
@@ -24,9 +21,11 @@
 
 .explorer__tab-header {
     writing-mode: tb-rl;
+    min-width: 22px; /* fix for firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=1223180 */
 }
 
 .explorer__tab-button {
+    display: inline-block;
     padding: 1em 0;
     background-color: black;
     cursor: pointer;
@@ -50,7 +49,15 @@
 
 .explorer__layout-button {
     border: none;
+    white-space: nowrap;
     background-color: transparent;
     color: white;
     text-decoration: underline;
+    cursor: pointer;
+}
+
+.layout-manager {
+    position: relative;
+    height: 100%;
+    flex: 1;
 }

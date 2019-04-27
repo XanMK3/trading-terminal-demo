@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FlexLayout from 'flexlayout-react';
+import FlexLayout from 'flexlayout-react/lib/index';
 import DEFAULT_LAYOUT from './layouts/default.json';
 import './style.scss';
 
@@ -17,10 +17,6 @@ class App extends Component {
             layout: DEFAULT_LAYOUT,
         }),
     };
-
-    componentDidMount() {
-        setTimeout(this.forceUpdate.bind(this), 0);
-    }
 
     toggleNav = () => {
         const { navOpen } = this.state;
@@ -100,8 +96,8 @@ class App extends Component {
                 <div className='layout-manager'>
                     <FlexLayout.Layout
                         ref={this.layoutRef}
-                        model={model}
                         factory={this.factory}
+                        model={model}
                     />
                 </div>
             </div>
