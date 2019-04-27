@@ -1,8 +1,9 @@
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const baseConfig = require('./webpack.config.js');
 
 const prodConfig = Object.assign({}, baseConfig, {
+    mode: 'production',
     module: {
         rules: [
             {
@@ -12,10 +13,13 @@ const prodConfig = Object.assign({}, baseConfig, {
             },
             {
                 test: /\.css$|\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader?sourceMap', 'sass-loader?sourceMap'],
-                }),
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                    },
+                    'css-loader',
+                    'sass-loader',
+                ],
             },
             {
                 test: /\.(jpg|png|svg|woff|woff2|eot|ttf)$/,
@@ -33,13 +37,12 @@ const prodConfig = Object.assign({}, baseConfig, {
 });
 
 prodConfig.plugins.push(
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
         filename: '[contenthash].css',
     }),
     new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production'),
     }),
-    new webpack.optimize.UglifyJsPlugin(),
 );
 
 module.exports = prodConfig;

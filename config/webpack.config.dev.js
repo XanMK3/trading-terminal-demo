@@ -1,6 +1,7 @@
 const baseConfig = require('./webpack.config.js');
 
 const devConfig = Object.assign({}, baseConfig, {
+    mode: 'development',
     devtool: 'eval',
     devServer: {
         contentBase: baseConfig.output.path,
