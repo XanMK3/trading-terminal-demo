@@ -80,38 +80,48 @@ class App extends Component {
                         </span>
                     </div>
                     <div className='explorer__panel' style={{ display: navOpen ? 'block' : 'none' }}>
-                        <ul className='explorer__list'>
-                            {Object.keys(modules).map(id => (
-                                <li key={id} className='explorer__list-item'>
-                                    <div
-                                        draggable
-                                        onDragStart={() => {
-                                            /* eslint-disable no-underscore-dangle */
-                                            const nodeId = Object.values(model._idMap)
-                                                .findIndex(node => node._attributes.component === id);
-                                            /* eslint-enable no-underscore-dangle */
-                                            if (nodeId === -1) {
-                                                this.layoutRef.current.addTabWithDragAndDrop(
-                                                    id,
-                                                    { type: 'tab', component: id, name: id },
-                                                );
-                                            }
+                        <div className='explorer__panel-block'>
+                            <div className='explorer__panel-title'>Modules</div>
+                            <ul className='explorer__list'>
+                                {Object.keys(modules).map(id => (
+                                    <li key={id} className='explorer__list-item'>
+                                        <div
+                                            draggable
+                                            onDragStart={() => {
+                                                /* eslint-disable no-underscore-dangle */
+                                                const nodeId = Object.values(model._idMap)
+                                                    .findIndex(node => node._attributes.component === id);
+                                                /* eslint-enable no-underscore-dangle */
+                                                if (nodeId === -1) {
+                                                    this.layoutRef.current.addTabWithDragAndDrop(
+                                                        id,
+                                                        { type: 'tab', component: id, name: id },
+                                                    );
+                                                }
+                                            }}
+                                        >
+                                            {id}
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className='explorer__panel-block'>
+                            <div className='explorer__panel-title'>Layouts</div>
+                            <ul className='explorer__list'>
+                                <li>
+                                    <button
+                                        className='explorer__layout-button'
+                                        type='button'
+                                        onClick={() => {
+                                            this.loadLayout('default');
                                         }}
                                     >
-                                        {id}
-                                    </div>
+                                        {'Default'}
+                                    </button>
                                 </li>
-                            ))}
-                        </ul>
-                        <button
-                            className='explorer__layout-button'
-                            type='button'
-                            onClick={() => {
-                                this.loadLayout('default');
-                            }}
-                        >
-                            {'Default layout'}
-                        </button>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div className='layout-manager'>
