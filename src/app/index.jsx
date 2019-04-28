@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import qs from 'query-string';
 import FlexLayout from 'flexlayout-react/lib/index';
 import DEFAULT_LAYOUT from './layouts/default.json';
 import './style.scss';
+
+const layouts = {
+    default: DEFAULT_LAYOUT,
+};
 
 const GLOBAL_CONFIG = {
     splitterSize: 4,
@@ -10,13 +15,20 @@ const GLOBAL_CONFIG = {
 class App extends Component {
     layoutRef = React.createRef()
 
-    state = {
-        navOpen: false,
-        model: FlexLayout.Model.fromJson({
-            global: GLOBAL_CONFIG,
-            layout: DEFAULT_LAYOUT,
-        }),
-    };
+    constructor(props) {
+        super(props);
+
+        const { layout: name } = qs.parse(window.location.search);
+        const layout = layouts[name];
+
+        this.state = {
+            navOpen: !layout,
+            model: FlexLayout.Model.fromJson({
+                global: GLOBAL_CONFIG,
+                layout: layout || {},
+            }),
+        };
+    }
 
     toggleNav = () => {
         const { navOpen } = this.state;
@@ -36,10 +48,11 @@ class App extends Component {
         return null;
     }
 
-    loadLayout = () => {
+    loadLayout = (name) => {
+        const layout = layouts[name];
         const model = FlexLayout.Model.fromJson({
             global: GLOBAL_CONFIG,
-            layout: DEFAULT_LAYOUT,
+            layout: layout || {},
         });
         this.setState({ model });
     }
@@ -90,7 +103,15 @@ class App extends Component {
                                 </li>
                             ))}
                         </ul>
-                        <button className='explorer__layout-button' type='button' onClick={this.loadLayout}>Default layout</button>
+                        <button
+                            className='explorer__layout-button'
+                            type='button'
+                            onClick={() => {
+                                this.loadLayout('default');
+                            }}
+                        >
+                            {'Default layout'}
+                        </button>
                     </div>
                 </div>
                 <div className='layout-manager'>

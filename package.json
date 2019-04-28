@@ -8,6 +8,7 @@
     "file-loader": "^3.0.1",
     "flexlayout-react": "^0.3.3",
     "plotly.js": "^1.47.3",
+    "query-string": "^6.4.2",
     "react": "^16.6.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.6.0",
