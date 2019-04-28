@@ -39,6 +39,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.6.0",
     "node-sass": "^4.11.0",
@@ -54,6 +55,8 @@
     "build": "webpack --config ./config/webpack.config.prod.js",
     "eslint": "node_modules/.bin/eslint.cmd --ext .js --ext .jsx ./src",
     "eslint:fix": "node_modules/.bin/eslint.cmd --ext .js --ext .jsx ./src --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   }
 }
