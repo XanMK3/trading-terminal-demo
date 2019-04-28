@@ -19,7 +19,7 @@ module.exports = {
         path: distPath,
         filename: '[hash].js',
         chunkFilename: '[id].[hash].js',
-        publicPath: '/',
+        publicPath: '',
     },
     resolve: {
         modules: ['node_modules', srcPath],
