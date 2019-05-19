@@ -24,6 +24,26 @@ module.exports = {
         modules: ['node_modules', srcPath],
         extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
     },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                default: false,
+                vendors: false,
+                vendor: {
+                    chunks: 'all',
+                    test: /node_modules/,
+                },
+                common: {
+                    name: 'common',
+                    minChunks: 2,
+                    chunks: 'async',
+                    priority: 10,
+                    reuseExistingChunk: true,
+                    enforce: true,
+                },
+            },
+        },
+    },
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.NamedModulesPlugin(),
