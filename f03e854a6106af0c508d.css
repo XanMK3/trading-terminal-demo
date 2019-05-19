@@ -1,0 +1,78 @@
+.flexlayout__tab_button {
+  padding: 0px 8px;
+  margin: 0; }
+
+.flexlayout__tab_button_content {
+  line-height: 18px;
+  text-transform: capitalize; }
+
+.flexlayout__tab_button_trailing {
+  margin-left: 8px;
+  margin-top: 4px;
+  width: 6px;
+  height: 6px; }
+
+.app {
+  display: flex;
+  width: 100%;
+  height: 100vh; }
+
+.explorer {
+  display: flex;
+  flex: 0 0 auto;
+  color: white;
+  background-color: #404040;
+  border-right: 1px solid #585858; }
+
+.explorer__tab-header {
+  writing-mode: tb-rl;
+  min-width: 22px;
+  /* fix for firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=1223180 */ }
+
+.explorer__tab-button {
+  display: inline-block;
+  padding: 1em 0;
+  background-color: black;
+  cursor: pointer; }
+
+.explorer__panel {
+  padding: 16px; }
+
+.explorer__panel-block {
+  margin-bottom: 40px; }
+  .explorer__panel-block:last-child {
+    margin-bottom: 0; }
+
+.explorer__panel-title {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: #b5b5b5; }
+
+.explorer__list {
+  margin: 1em 0;
+  padding: 0;
+  list-style: none; }
+
+.explorer__list-item {
+  padding: 0.5em 0;
+  margin: 0;
+  text-transform: capitalize; }
+
+.explorer__layout-button {
+  padding: 0;
+  border: none;
+  white-space: nowrap;
+  background-color: transparent;
+  color: white;
+  text-decoration: underline;
+  cursor: pointer; }
+
+.layout-manager {
+  position: relative;
+  height: 100%;
+  flex: 1; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
+
