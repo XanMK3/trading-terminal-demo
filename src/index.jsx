@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux-dynamic-modules';
 import thunk from 'redux-thunk';
+import { getSagaExtension } from 'redux-dynamic-modules-saga';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { AppContainer } from 'react-hot-loader';
 import modules from 'modules';
@@ -10,7 +11,14 @@ import App from 'app';
 import http from 'services/http';
 import 'style/main.scss';
 
-const store = createStore({}, [], [{ middleware: [thunk.withExtraArgument({ http })] }]);
+const store = createStore(
+    {},
+    [],
+    [
+        { middleware: [thunk.withExtraArgument({ http })] },
+        getSagaExtension({ http }),
+    ],
+);
 
 const render = (AppComponent) => {
     ReactDOM.render(
