@@ -1,1 +1,1 @@
-export const initialState = { data: [] };
+export const initialState = { data: [], error: null };

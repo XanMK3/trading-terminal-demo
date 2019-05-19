@@ -1,6 +1,7 @@
 import SYMBOLS from 'constants/symbols';
 import reducer from './reducer';
-import { getQuotes } from './actions';
+import saga from './saga';
+import { startQuotesPolling } from './actions';
 
 export function getQuotesModule() {
     return {
@@ -8,7 +9,8 @@ export function getQuotesModule() {
         reducerMap: {
             quotes: reducer,
         },
-        initialActions: [getQuotes(SYMBOLS)],
+        sagas: [saga],
+        initialActions: [startQuotesPolling(SYMBOLS)],
         finalActions: [],
     };
 }
