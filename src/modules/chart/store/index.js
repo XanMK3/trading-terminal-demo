@@ -1,5 +1,6 @@
 import reducer from './reducer';
-import { getTimeseries } from './actions';
+import saga from './saga';
+import { startTimeseriesPolling } from './actions';
 
 export function getChartModule() {
     return {
@@ -7,7 +8,8 @@ export function getChartModule() {
         reducerMap: {
             chart: reducer,
         },
-        initialActions: [getTimeseries('aapl')],
+        sagas: [saga],
+        initialActions: [startTimeseriesPolling('aapl')],
         finalActions: [],
     };
 }
