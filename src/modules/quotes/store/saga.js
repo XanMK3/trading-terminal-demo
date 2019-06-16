@@ -1,6 +1,6 @@
 import {
     getContext,
-    takeEvery,
+    takeLatest,
     call,
     put,
     race,
@@ -27,13 +27,14 @@ function* pollSagaWorker(symbols) {
 
     while (true) {
         try {
-            const { data } = yield call(() => http.get(`tops/last?symbols=${symbols.join()}`));
+            const { data } = yield call(http.get, `tops/last?symbols=${symbols.join()}`);
             yield put(requestQuotesSuccess(data));
-            yield call(delay, TIMEOUT);
         }
         catch (error) {
             yield put(requestQuotesError(error));
         }
+
+        yield call(delay, TIMEOUT);
     }
 }
 
@@ -47,5 +48,5 @@ function* pollSagaWatcher(action) {
 }
 
 export default function* rootSaga() {
-    yield takeEvery(START_QUOTES_POLLING, pollSagaWatcher);
+    yield takeLatest(START_QUOTES_POLLING, pollSagaWatcher);
 }
