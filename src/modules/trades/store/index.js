@@ -1,6 +1,7 @@
 import SYMBOLS from 'constants/symbols';
 import reducer from './reducer';
-import { getTrades } from './actions';
+import saga from './saga';
+import { startTradesPolling } from './actions';
 
 export function getTradesModule() {
     return {
@@ -8,7 +9,8 @@ export function getTradesModule() {
         reducerMap: {
             trades: reducer,
         },
-        initialActions: [getTrades(SYMBOLS)],
+        sagas: [saga],
+        initialActions: [startTradesPolling(SYMBOLS)],
         finalActions: [],
     };
 }
