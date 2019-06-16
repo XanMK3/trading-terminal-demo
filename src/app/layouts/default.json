@@ -8,26 +8,51 @@
             "weight": 75,
             "children": [
                 {
-                    "type": "tabset",
-                    "id": "3",
+                    "type": "row",
+                    "id": "#6",
                     "weight": 50,
-                    "children": [{
-                        "type": "tab",
-                        "id": "4",
-                        "name": "Quotes",
-                        "component": "quotes"
-                    }]
+                    "children": [
+                        {
+                            "type": "tabset",
+                            "id": "3",
+                            "weight": 50,
+                            "children": [
+                                {
+                                    "type": "tab",
+                                    "id": "4",
+                                    "name": "Quotes",
+                                    "component": "quotes"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "tabset",
+                            "id": "#5",
+                            "weight": 50,
+                            "children": [
+                                {
+                                    "type": "tab",
+                                    "id": "#4",
+                                    "name": "trades",
+                                    "component": "trades"
+                                }
+                            ],
+                            "active": true
+                        }
+                    ]
                 },
                 {
                     "type": "tabset",
                     "id": "5",
                     "weight": 50,
-                    "children": [{
-                        "type": "tab",
-                        "id": "6",
-                        "name": "Chart",
-                        "component": "chart"
-                    }]
+                    "children": [
+                        {
+                            "type": "tab",
+                            "id": "6",
+                            "name": "Chart",
+                            "component": "chart"
+                        }
+                    ]
                 }
             ]
         },
