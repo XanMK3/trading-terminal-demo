@@ -1,5 +1,6 @@
 import reducer from './reducer';
-import { getNews } from './actions';
+import saga from './saga';
+import { startNewsPolling } from './actions';
 
 export function getNewsModule() {
     return {
@@ -7,7 +8,8 @@ export function getNewsModule() {
         reducerMap: {
             news: reducer,
         },
-        initialActions: [getNews()],
+        sagas: [saga],
+        initialActions: [startNewsPolling()],
         finalActions: [],
     };
 }
