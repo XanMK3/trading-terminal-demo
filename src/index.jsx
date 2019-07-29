@@ -20,6 +20,10 @@ const store = createStore(
     ],
 );
 
+// save store in global variable for demo purpose
+// eslint-disable-next-line no-underscore-dangle
+window.__store__ = store;
+
 const render = (AppComponent) => {
     ReactDOM.render(
         <AppContainer>
